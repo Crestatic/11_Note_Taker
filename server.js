@@ -3,10 +3,10 @@ const express = require('express');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; //process.env.PORT is an environment variable.
 
 //connects to Json, connect PORT, and connect public folder to app
-app.use(express.urlencuded({ extended: true}));
+app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(express.static('public'));
 
