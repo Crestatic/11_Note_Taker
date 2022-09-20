@@ -1,15 +1,15 @@
 // dependencies
 const path = require('path');
 const fs = require('fs');
-const { allowedNodeEnvironmentFlags } = require('process');
+// const { allowedNodeEnvironmentFlags } = require('process');
 const uuid = require('uuid').v4;
 
 module.exports = (app) => {
 
-    let database = JSON.parse(fs.readFileSync('../db/db.json'));
+    let database = JSON.parse(fs.readFileSync('./db/db.json', 'utf8')); // try using __dirname
 
     app.get('/api/notes', (req, res) => {
-        return res.json(db);
+        return res.json(database);
     });
 
     app.post('/api/notes', (req, res) => {
@@ -17,7 +17,7 @@ module.exports = (app) => {
 
         database.push(note);
 
-        fs.writeFile('../db/db.json', JSON.stringify(note), (err) => {
+        fs.writeFile('./db/db.json', JSON.stringify(note), (err) => {
             if (err) throw err;
         });
 
