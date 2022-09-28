@@ -1,9 +1,9 @@
 // dependencies
 const express = require('express');
 
-
+// middleware for express.
 const app = express();
-const PORT = process.env.PORT || 3000; //process.env.PORT is an environment variable.
+const PORT = process.env.PORT || 3001; //process.env.PORT is an environment variable.
 
 //connects to Json, connect PORT, and connect public folder to app
 app.use(express.urlencoded({ extended: true}));

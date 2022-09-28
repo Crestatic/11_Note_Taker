@@ -1,12 +1,10 @@
 // dependencies
-const path = require('path');
 const fs = require('fs');
-// const { allowedNodeEnvironmentFlags } = require('process');
 const uuid = require('uuid').v4;
 
 module.exports = (app) => {
 
-    let database = JSON.parse(fs.readFileSync('./db/db.json', 'utf8')); // try using __dirname
+    let database = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
 
     app.get('/api/notes', (req, res) => {
         return res.json(database);
@@ -17,26 +15,26 @@ module.exports = (app) => {
 
         database.push(note);
 
-        fs.writeFile('./db/db.json', JSON.stringify(note), (err) => {
+        fs.writeFile('./db/db.json', JSON.stringify(database), (err) => {
             if (err) throw err;
         });
 
-        res.json(note);
+        res.json(database);
     });
 
     app.delete('/api/notes/:id', (req, res) => {
         const noteId = req.params.id;
 
-        for(let i = 0; i < note.length; i++) {
-            if(note[i].id === noteId) {
-                note.splice(i, 1);
+        for(let i = 0; i < database.length; i++) {
+            if(database[i].id === noteId) {
+                database.splice(i, 1);
             }
         }
 
-        fs.writeFile('../db/db.json', JSON.stringify(note), (err) => {
+        fs.writeFile('./db/db.json', JSON.stringify(database), (err) => {
             if (err) throw err;
         });
 
-        res.json(note);
+        res.json(database);
     });
 }
